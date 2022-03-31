@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { Route, Routes } from 'react-router-dom'
-import { list, remove } from './api/product'
+import { create, list, remove } from './api/product'
 import ProductList from './components/ProductList'
 import Dashboard from './pages/Dashboard'
 import AdminLayout from './pages/layout/AdminLayout'
@@ -31,6 +31,14 @@ function App() {
       setProducts(products.filter(item => item.id !== id))
     }
 
+    const onHandleAdd = async (product:any) => {
+      console.log('app.s', product)
+
+      const {data} = await create(product)
+
+      setProducts([...products, data])
+    }
+
   return (
     <div className="App">
       <Routes>
@@ -43,7 +51,7 @@ function App() {
         <Route path='/admin' element={<AdminLayout/>}>
           <Route index element={<Dashboard/>}/>
           <Route path='product' element={<ProductManager products={products} onRemove={onHandleRemove}/>}/>
-          <Route path='product/add' element={<ProductAdd/>}/>
+          <Route path='product/add' element={<ProductAdd onAdd={onHandleAdd}/>}/>
         </Route>
       </Routes>
     </div>
