@@ -4,7 +4,7 @@ type Props = {}
 
 const Footer = (props: Props) => {
     return (
-        <footer className="border-t border-gray-200 bg-blue-900">
+        <footer className="border-t border-gray-200 bg-black">
             <div className="text-white container flex flex-col flex-wrap px-4 mx-auto md:items-center lg:items-start md:flex-row md:flex-nowrap">
                 <div className="flex-shrink-0 w-64 mx-auto text-center md:mx-0 md:text-left mt-4">
                     <h2 className="mb-2 font-bold text-2xl pl-7">
@@ -27,10 +27,10 @@ const Footer = (props: Props) => {
                 </div>
                 <div className="justify-between w-full mt-4 lg:flex">
                     <div className="w-full px-4 lg:w-1/3 md:w-1/2">
-                        <h2 className="mb-2 font-bold text-2xl text-white pl-7">
+                        <h2 className="mb-2 font-bold text-2xl text-white text-center">
                             Liên kết
                         </h2>
-                        <ul className="mb-8 space-y-2 text-sm list-none">
+                        <ul className="mb-8 space-y-2 text-sm list-none text-center">
                             <li className="cursor-pointer">
                                 <a className="text-white hover:text-orange-700 no-underline">Giới thiệu</a>
                             </li>
