@@ -17,3 +17,7 @@ export const create = (product: ProductType) =>{
     const url = `/products`
     return instance.post(url,product)
 }
+export const update = (product: ProductType) => {
+    const url = `/products/${product.id}`
+    return instance.put(url,product)
+}
