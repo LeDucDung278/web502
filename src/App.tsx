@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { Route, Routes } from 'react-router-dom'
-import { list } from './api/product'
+import { list, remove } from './api/product'
 import ProductList from './components/ProductList'
 import Dashboard from './pages/Dashboard'
 import AdminLayout from './pages/layout/AdminLayout'
@@ -11,6 +11,7 @@ import ProductManager from './components/ProductManager'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import { ProductType } from './type/Product'
+import ProductAdd from './components/ProductAdd'
 
 function App() {
 
@@ -24,6 +25,11 @@ function App() {
       }
       getProducts()
     },[])
+  
+    const onHandleRemove = async (id: number) => {
+      remove(id)
+      setProducts(products.filter(item => item.id !== id))
+    }
 
   return (
     <div className="App">
@@ -36,7 +42,8 @@ function App() {
 
         <Route path='/admin' element={<AdminLayout/>}>
           <Route index element={<Dashboard/>}/>
-          <Route path='product' element={<ProductManager products={products}/>}/>
+          <Route path='product' element={<ProductManager products={products} onRemove={onHandleRemove}/>}/>
+          <Route path='product/add' element={<ProductAdd/>}/>
         </Route>
       </Routes>
     </div>
