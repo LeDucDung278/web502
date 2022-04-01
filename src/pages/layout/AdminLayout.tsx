@@ -25,7 +25,7 @@ const AdminLayout = (props: Props) => {
               <ul className="text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownBottomButton">
                 <div>
                   <li>
-                    <a href="#" className="block py-2 pl-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Trang chủ</a>
+                    <a href="/" className="block py-2 pl-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Trang chủ</a>
                   </li>
                   <div className="py-1">
                     <a href="#" className="block py-2 pl-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
@@ -42,14 +42,14 @@ const AdminLayout = (props: Props) => {
         <aside id="sidebar" className="p-0 bg-side-nav w-1/2 md:w-1/6 lg:w-1/6 border-r border-side-nav hidden md:block lg:block">
           <ul className="list-reset flex flex-col p-0">
             <li className=" w-full h-full py-3 px-2 border-b border-light-border bg-white hover:bg-orange-300 dark:hover:bg-gray-600">
-              <a href="/" className="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
+              <a href="/admin/dashboard" className="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
                 <i className="fas fa-tachometer-alt float-left m-2" />
                 Dashboard
                 <span><i className="fas fa-angle-right float-right" /></span>
               </a>
             </li>
             <li className="w-full h-full py-3 px-2 border-b border-light-border bg-white hover:bg-orange-300 dark:hover:bg-gray-600">
-              <a href="/" className="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
+              <a href="/admin/product" className="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline">
                 <i className="fab fa-wpforms float-left m-2" />
                 Products
                 <span><i className="fa fa-angle-right float-right" /></span>

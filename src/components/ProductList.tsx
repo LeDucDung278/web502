@@ -20,7 +20,7 @@ const ProductList = ({products}: ProductListProps) => {
             </button>
           </div>
           <div className="px-5 py-3">
-            <a href={`/product/${item.id}`}>
+            <a href={`/product/${item._id}`}>
               <h3  className="text-gray-700 uppercase">{item.name}</h3>
               <span className="text-gray-500 mt-2">{item.price}</span>
             </a>
