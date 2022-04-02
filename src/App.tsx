@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 
 import { Route, Routes } from 'react-router-dom'
+import { ToastContainer, toast} from 'react-toastify';
+import "react-toastify/dist/ReactToastify.min.css"
 import { create, list, remove, update } from './api/product'
 import ProductList from './components/ProductList'
 import Dashboard from './pages/Dashboard'
@@ -68,6 +70,7 @@ function App() {
                 <Route path='/signup'element={<SignUp/>}/>
                 <Route path='/signin'element={<SignIn/>}/>
             </Routes>
+            <ToastContainer />
         </div>
     )
 }
