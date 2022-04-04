@@ -1,4 +1,5 @@
 import React from 'react'
+import Nav from './Nav'
 
 type Props = {}
 
@@ -94,6 +95,7 @@ const Header = (props: Props) => {
                     </div>
                 </div>
             </div>
+            <Nav/>
         </header>
 
     )

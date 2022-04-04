@@ -11,7 +11,6 @@ const WebsiteLayout = (props: Props) => {
     return (
         <div className='container mx-auto'>
             <Header />
-            <Nav />
             <main className='grid grid-cols-5 gap-6'>
                 <Sidebar/>
                 <div className='col-span-4'>
