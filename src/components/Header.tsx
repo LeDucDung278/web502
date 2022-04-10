@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Nav from './Nav'
 import App from '../App'
+import { toast, ToastContainer } from 'react-toastify'
 import { search } from '../api/product'
 import { useNavigate } from 'react-router-dom'
-import { authenticated, isAuthenticate } from '../utils/localStorage'
+import { authenticated, isAuthenticate, logout } from '../utils/localStorage'
+import { User } from '../type/User'
 
 type Props = {}
 
@@ -15,7 +17,36 @@ const Header = (props: Props) => {
             navigate(`/product/search/${search_value}`)
         }
     }
-    
+
+
+
+    const [User, setUser] = useState<User>()
+
+    useEffect(() => {
+        const getUser = async () => {
+            const { user } = await isAuthenticate();
+            console.log(user);
+            setUser(user);
+        }
+        getUser()
+    }, [])
+
+    const onClickLogOut = async () => {
+        const confirm = window.confirm("Bạn chắc chắn muốn đăng xuất");
+        if (confirm) {
+            logout()
+            toast.success("Đăng xuất thành công")
+            setTimeout(() => {
+                navigate("/")
+            }, 5000);
+        };
+    }
+    //     logout();
+    //     toast.success("Đăng xuất thành công")
+    //     setTimeout(() => {
+    //         navigate("/")
+    //     }, 3000);
+    // }
 
     return (
         <header className="bg-gray-300">
@@ -61,10 +92,27 @@ const Header = (props: Props) => {
                         </div>
                     </div>
                     <div className="mr-7">
-                        <a href="/signin" className="hover:text-black text-black no-underline">
-                            <i className="fa fa-user mr-2 hover:text-orange-700" />
-                            Đăng Nhập
-                        </a>
+                        {User ?
+                            <div className="group inline-block">
+                                <a className=" cursor-pointer outline-none focus:outline-none px-3 py-1 mb-4 items-center min-w-32 pointer-events-auto">
+                                    <i className="fa fa-user mr-2 hover:text-orange-700" />{User.name}
+                                </a>
+                                <ul className="mt-2 z-10 bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32">
+                                    <li className="rounded-sm px-3 py-1 hover:bg-gray-100">
+                                        <a  className='cursor-pointer text-black no-underline' >Thông tin</a>
+                                    </li>
+                                    <div className="py-1">
+                                        <a href="" onClick={onClickLogOut} className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">Log out</a>
+                                    </div>
+
+                                </ul>
+                            </div>
+                            : <a href="/signin" className="hover:text-black text-black no-underline">
+                                <i className="fa fa-user mr-2 hover:text-orange-700" />
+                                Đăng nhập
+                            </a>
+                        }
+
                     </div>
                 </div>
             </div>
