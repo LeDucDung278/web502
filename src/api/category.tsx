@@ -1,5 +1,5 @@
 import instance from './instance';
-export const list = () => {
+export const listcate = () => {
     const url = `/categories`;
     return instance.get(url)
 }

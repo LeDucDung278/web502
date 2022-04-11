@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { list } from '../api/category'
+import { listcate } from '../api/category'
 import { Category } from '../type/Category'
 
 type Props = {}
@@ -8,7 +8,7 @@ const Sidebar = (props: Props) => {
     const [cate, setCate] = useState<Category[]>([])
     useEffect(() => {
         const cate = async () => {
-            const { data } = await list()
+            const { data } = await listcate()
             setCate(data)
         }
         cate()

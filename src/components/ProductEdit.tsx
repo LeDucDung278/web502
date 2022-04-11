@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
-import { list } from '../api/category'
+import { listcate } from '../api/category'
 import { read } from '../api/product'
 import { Category } from '../type/Category'
 import { ProductType } from '../type/Product'
@@ -34,7 +34,7 @@ const ProductEdit = (props: ProductEditProps) => {
     const [cate, setCate] = useState<Category[]>([])
     useEffect(() => {
         const cate = async () => {
-            const { data } = await list()
+            const { data } = await listcate()
             setCate(data)
         }
         cate()
