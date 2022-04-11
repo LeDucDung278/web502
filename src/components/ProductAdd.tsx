@@ -1,13 +1,16 @@
-import React from 'react'
-import {useForm, SubmitHandler} from 'react-hook-form'
+import React, { useEffect, useState } from 'react'
+import { useForm, SubmitHandler } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import { list } from '../api/category'
+import { Category } from '../type/Category'
 import { ProductType } from '../type/Product'
 
 type ProductAddProps = {
     onAdd: (product: ProductType) => void
 }
-type FormInputs= {
+type FormInputs = {
     name: string,
+    category: string,
     price: number,
     img: string,
     quantity: number
@@ -15,38 +18,57 @@ type FormInputs= {
 }
 
 const ProductAdd = (props: ProductAddProps) => {
-    const { register, handleSubmit, formState: {errors}} = useForm<FormInputs>()
+    const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>()
     const navigate = useNavigate()
     const onSubmit: SubmitHandler<FormInputs> = data => {
         props.onAdd(data)
         navigate("/admin/product")
     }
+    const [cate, setCate] = useState<Category[]>([])
+    useEffect(() => {
+        const cate = async () => {
+            const { data } = await list()
+            setCate(data)
+        }
+        cate()
+    }, [])
     return (
         <div className="bg-white">
             <h1 className="text-2xl">Thêm sản phẩm</h1>
             <form id="form-add-pro" onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-3">
+                    <label className="uppercase md:text-sm text-xs text-gray-500 text-gray-600 font-semibold mb-1">Danh mục sản phẩm<span className="text-red-500">*</span></label><br />
+                    <select className="bg-teal p-3 rounded shadow-inner w-full" {...register('category')} id="">
+                        <option value="">--Chọn danh mục--</option>
+                        {cate?.map((e, index) => {
+                            return (
+                                <option key={index} value={`${e._id}`}>{e.name}</option>
+                            )
+                        })}
+                    </select>
+                </div>
+                <div className="mb-3">
                     <label className="uppercase md:text-sm text-xs text-gray-500 text-gray-600 font-semibold mb-1">Tên sản phẩm<span className="text-red-500">*</span></label><br />
-                    <input type="text" {...register('name')} className="border border-gray-300 p-2 w-full"  id="name"  />
+                    <input type="text" {...register('name')} className="border border-gray-300 p-2 w-full" id="name" />
                 </div>
                 <div className="mb-3 grid grid-cols-2 gap-6">
                     <div>
                         <label className="uppercase md:text-sm text-xs text-gray-500 text-gray-600 font-semibold mb-1">Giá tiền<span className="text-red-500">*</span></label><br />
-                        <input type="number" {...register('price')} className="border border-gray-300 p-2 w-full"  id="price"  />
+                        <input type="number" {...register('price')} className="border border-gray-300 p-2 w-full" id="price" />
                     </div>
                     {/* ... */}
                     <div>
                         <label className="uppercase md:text-sm text-xs text-gray-500 text-gray-600 font-semibold mb-1">Số lượng<span className="text-red-500">*</span></label><br />
-                        <input type="number" {...register('quantity')} className="border border-gray-300 p-2 w-full"  id="quantity"  />
+                        <input type="number" {...register('quantity')} className="border border-gray-300 p-2 w-full" id="quantity" />
                     </div>
                 </div>
                 <div className="mb-3">
                     <label className="uppercase md:text-sm text-xs text-gray-500 text-gray-600 font-semibold mb-1">Mô tả<span className="text-red-500">*</span></label><br />
-                    <textarea {...register('desc')} className="w-full sec p-3 h-60 border border-gray-300 "  id="desc" placeholder="Mô tả sản phẩm" defaultValue={""} />
+                    <textarea {...register('desc')} className="w-full sec p-3 h-60 border border-gray-300 " id="desc" placeholder="Mô tả sản phẩm" defaultValue={""} />
                 </div>
                 <div className="mb-3">
                     <label className="uppercase md:text-sm text-xs text-gray-500 text-gray-600 font-semibold mb-1">Upload Photo<span className="text-red-500">*</span></label><br />
-                    <input type="text" {...register('img')} className="w-full sec p-3 h-30 border border-gray-300 "  id="desc" placeholder="Upload ảnh"  />
+                    <input type="text" {...register('img')} className="w-full sec p-3 h-30 border border-gray-300 " id="desc" placeholder="Upload ảnh" />
                 </div>
 
                 {/* <div className="mb-3 flex justify-center">
