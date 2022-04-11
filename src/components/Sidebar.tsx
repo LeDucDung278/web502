@@ -1,8 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { list } from '../api/category'
+import { Category } from '../type/Category'
 
 type Props = {}
 
 const Sidebar = (props: Props) => {
+    const [cate, setCate] = useState<Category[]>([])
+    useEffect(() => {
+        const cate = async () => {
+            const { data } = await list()
+            setCate(data)
+        }
+        cate()
+    }, [])
     return (
         <aside className="z-20 hidden w-full bg-white dark:bg-gray-800 md:block flex-shrink-0">
             <div className="pb-4 text-gray-500 dark:text-gray-400 bg-gray-800 mt-5">
@@ -14,39 +24,18 @@ const Sidebar = (props: Props) => {
                     </li>
                 </ul>
                 <ul>
-                    <li className="relative px-6 py-3">
-                        <a className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="">
-                            <span className="ml-4">Danh Mục 1</span>
-                        </a>
-                    </li>
-                    <li className="relative px-6 py-3">
-                        <a className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="">
-                            <span className="ml-4">Danh Mục 2</span>
-                        </a>
-                    </li>
-                    <li className="relative px-6 py-3">
-                        <a className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="">
-                            <span className="ml-4">Danh Mục 3</span>
-                        </a>
-                    </li>
-                    <li className="relative px-6 py-3">
-                        <a className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="">
-                            <span className="ml-4">Danh Mục 4</span>
-                        </a>
-                    </li>
-                    <li className="relative px-6 py-3">
-                        <a className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="">
-                            <span className="ml-4">Danh Mục 5</span>
-                        </a>
-                    </li>
-                    <li className="relative px-6 py-3">
-                        <a className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200" href="">
-                            <span className="ml-4">Danh Mục 6</span>
-                        </a>
-                    </li>
+                    {cate?.map((item, index) => {
+                        return (
+                            <li key={index} className="relative px-6 py-3">
+                                <a href={`product/category/${item._id}`} className="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                                    <span className="ml-4">{item.name}</span>
+                                </a>
+                            </li>
+                        )
+                    })}
                 </ul>
             </div>
-        </aside> 
+        </aside>
     )
 }
 
