@@ -16,10 +16,10 @@ const ProductManager = (props: ProductManagerProps) => {
                     <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                         <th className="py-3 px-2 text-center">Stt</th>
                         <th className="py-3 px-6 text-left">Ảnh</th>
-                        <th className="py-3 px-6 text-left max-w-xs max-h-14 line-clamp-2">Tên</th>
+                        <th className="py-3 px-6 text-left max-h-14 max-w-xs line-clamp-2">Tên</th>
                         <th className="py-3 px-6 text-center">Giá</th>
                         <th className="py-3 px-6 text-center">Số lượng</th>
-                        <th className="py-3 px-6 text-center max-w-xs max-h-14 line-clamp-2">Mô tả</th>
+                        <th className="py-3 px-6 text-center max-h-14 max-w-xs line-clamp-2">Mô tả</th>
                         <th className="py-3 px-6 text-center">Actions</th>
                     </tr>
                 </thead>
@@ -33,20 +33,20 @@ const ProductManager = (props: ProductManagerProps) => {
                                 <td className="py-3 px-6 text-left">
                                     <div className="flex items-center">
                                         <div className="mr-2">
-                                            <img className="w-14 h-14" src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80${pro.img}" />
+                                            <img className="w-14 h-14" src={item.img} />
                                         </div>
                                     </div>
                                 </td>
-                                <td className="py-3 px-6 text-left max-w-xs max-h-14 line-clamp-2">
+                                <td className="py-3 px-6 text-left w-60 max-h-14 line-clamp-2">
                                     <span className="font-semibold">{item.name}</span>
                                 </td>
                                 <td className="py-3 px-6 text-center">
                                     <span>{item.price}</span>
                                 </td>
                                 <td className="py-3 px-6 text-center">
-                                    <span>45</span>
+                                    <span>{item.quantity}</span>
                                 </td>
-                                <td className="py-3 px-6 text-left max-w-xs h-14 line-clamp-2">
+                                <td className="py-3 px-6 text-left h-14 max-w-xs line-clamp-2">
                                     <span className="text-justify h-14">{item.desc}</span>
                                 </td>
                                 <td className="py-3 px-6 text-center">
