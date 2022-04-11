@@ -67,11 +67,34 @@ function App() {
 
     const onHandleUpdate = async (product: ProductType) => {
         try {
-            const { data } = await update(product);
-            setProducts(products.map(item => item._id === data._id ? product : item))
+            const apiUrl = "https://api.cloudinary.com/v1_1/dfwailscz/image/upload"
+            const image = product.img[0]
+            const formdata = new FormData()
+            formdata.append("file",image)
+            formdata.append("upload_preset","ass_react")
+            const {data} = await axios.post(apiUrl, formdata,{
+                headers: {
+                    "Content-type": "application/form-data",
+                }
+            })
+            const imgproduct = await update({...product, img:data.url})
+                //...item dữ liệu trong mảng product data dữ liệu mới cập nhật
+            const newProduct = products.map((item)=>
+                item._id === imgproduct.data._id ? product : item
+            )
+            toast.success("Bạn đã cập nhật sản phẩm thành công")
+            setProducts(newProduct)
+            setTimeout(()=> navigate("/admin/product"), 3000)
         } catch (error) {
-
+            toast.error("Cập nhật sản phẩm không thành công")
+            console.log(error)
         }
+        // try {
+        //     const { data } = await update(product);
+        //     setProducts(products.map(item => item._id === data._id ? product : item))
+        // } catch (error) {
+
+        // }
     }
 
     return (

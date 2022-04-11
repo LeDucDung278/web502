@@ -12,7 +12,7 @@ type FormInputs = {
     name: string,
     category: string,
     price: number,
-    img: string,
+    img: any,
     quantity: number
     desc: string,
 }
@@ -68,7 +68,7 @@ const ProductAdd = (props: ProductAddProps) => {
                 </div>
                 <div className="mb-3">
                     <label className="uppercase md:text-sm text-xs text-gray-500 text-gray-600 font-semibold mb-1">Upload Photo<span className="text-red-500">*</span></label><br />
-                    <input type="text" {...register('img')} className="w-full sec p-3 h-30 border border-gray-300 " id="desc" placeholder="Upload ảnh" />
+                    <input type="file" {...register('img')} className="w-full sec p-3 h-30 border border-gray-300 " id="desc" placeholder="Upload ảnh" />
                 </div>
 
                 {/* <div className="mb-3 flex justify-center">
