@@ -11,13 +11,10 @@ const Nav = (props: Props) => {
                         <a href="/#" className="uppercase block p-3 text-orange-700 hover:bg-white hover:text-orange-700 no-underline" aria-current="page">Trang chủ</a>
                     </li>
                     <li>
+                        <a href="/product" className="uppercase block p-3 text-white dark:border-gray-700 hover:bg-white hover:text-orange-700 no-underline">SẢN PHẨM</a>
+                    </li>
+                    <li>
                         <a href="/gioi-thieu" className="uppercase block p-3 text-white dark:border-gray-700 hover:bg-white hover:text-orange-700 no-underline">GIỚI THIỆU</a>
-                    </li>
-                    <li>
-                        <a href="" className="uppercase block p-3 text-white dark:border-gray-700 hover:bg-white hover:text-orange-700 no-underline">đồng hồ nam</a>
-                    </li>
-                    <li>
-                        <a href="" className="uppercase block p-3 text-white dark:border-gray-700 hover:bg-white hover:text-orange-700 no-underline">đồng hồ nữ</a>
                     </li>
                     <li>
                         <a href="/blogs" className="uppercase block p-3 text-white dark:border-gray-700 hover:bg-white hover:text-orange-700 no-underline">Blog</a>
