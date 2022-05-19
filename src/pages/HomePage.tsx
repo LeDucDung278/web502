@@ -1,29 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
-import { getone } from '../api/category';
-import { ProductType } from '../type/Product';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import ProductList from '../components/ProductList'
+import Sidebar from '../components/Sidebar'
+import { ProductType } from '../type/Product'
 
-type Props = {}
+type ProductList = {
+    products: ProductType[]
+}
 
-const CategoryList = (props: Props) => {
-    const { id } = useParams();
-    console.log(id)
-    const [cate, getcate] = useState<ProductType[]>([])
-    useEffect(() => {
-        const category = async () => {
-            const { data } = await getone(id)
-            console.log(data.products)
-            getcate(data.products)
-        }
-        category()
-    }, [])
+const HomePage = ({ products }: ProductList) => {
     return (
-
-        <div className="max-w-2xl mx-auto py-2 px-4 sm:py-4 sm:px-6 lg:max-w-7xl lg:px-8">
-            {/* <h3 className="text-gray-700 text-2xl font-medium">Wrist Watch</h3>
-      <span className="mt-3 text-sm text-gray-500">200+ Products</span> */}
+        
+        <div className="col-span-4 max-w-2xl mx-auto py-2 px-4 sm:py-4 sm:px-6 lg:max-w-7xl lg:px-8">
             <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                {cate?.map((item, index) => {
+                {products?.map((item, index) => {
                     return (
                         <div key={index} className="group relative boder">
                             <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
@@ -50,4 +40,4 @@ const CategoryList = (props: Props) => {
     )
 }
 
-export default CategoryList
+export default HomePage

@@ -7,8 +7,13 @@ import Nav from '../components/Nav'
 import { ProductType } from '../type/Product'
 
 type Props = {}
+let carts: any = []
+if(localStorage.getItem("cart")){
+  carts = JSON.parse(localStorage.getItem("cart") as string)
+}
 
 const ProductDetail = (props: Props) => {
+  const [CountQuantity, setCountQuantity] = useState(1)
   const { id } = useParams()
   const [product, setProduct] = useState<ProductType>()
 
@@ -21,9 +26,8 @@ const ProductDetail = (props: Props) => {
   }, [])
 
   return (
-    <div>
+    <div className=''>
       <Header />
-      <Nav />
       <main className="my-8">
         <div className="container mx-auto px-6">
           <div className="md:flex md:items-center">
@@ -39,12 +43,12 @@ const ProductDetail = (props: Props) => {
               <div className="mt-2">
                 <label className="text-gray-700 text-sm" htmlFor="count">Count:</label>
                 <div className="flex items-center mt-1">
-                  <button className="text-gray-500 focus:outline-none focus:text-gray-600">
-                    <svg className="h-5 w-5" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                  </button>
-                  <span className="text-gray-700 text-lg mx-2">20</span>
-                  <button className="text-gray-500 focus:outline-none focus:text-gray-600">
+                  <button onClick={() => setCountQuantity(CountQuantity-1)} className="text-gray-500 focus:outline-none focus:text-gray-600">
                     <svg className="h-5 w-5" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  </button>
+                  <span className="text-gray-700 text-lg mx-2">{CountQuantity}</span>
+                  <button onClick={() => setCountQuantity(CountQuantity+1)} className="text-gray-500 focus:outline-none focus:text-gray-600">
+                    <svg className="h-5 w-5" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                   </button>
                 </div>
               </div>
